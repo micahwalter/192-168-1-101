@@ -8,20 +8,6 @@ void testApp::setup(){
 	// we don't want to be running to fast
 	ofSetVerticalSync(true);
 
-	//load our type
-	mono.loadFont("type/mono.ttf",9);
-	monosm.loadFont("type/mono.ttf",8);
-
-	//some variables
-
-	//have we typed
-	typed	= false;
-
-	//our typing position
-	pos		= 0;
-
-	//our send and recieve strings
-	msgTx	= "";
 	msgRx	= "";
 
 	//are we connected to the server - if this fails we
@@ -41,9 +27,7 @@ void testApp::update(){
 
 	//we are connected - lets send our text and check what we get back
 	if(weConnected){
-		tcpClient.send(msgTx);
-
-		//if data has been sent lets update our text
+        //if data has been sent lets update our text
 		string str = tcpClient.receive();
 		if( str.length() > 0 ){
 			msgRx = str;
@@ -63,19 +47,6 @@ void testApp::update(){
 //--------------------------------------------------------------
 void testApp::draw(){
 
-	ofSetColor(20, 20, 20);
-	mono.drawString("openFrameworks TCP Send Example", 15, 30);
-
-	if(typed){
-		monosm.drawString("sending:", 15, 55);
-		monosm.drawString(msgTx, 85, 55);
-	}
-	else{
-		if(weConnected)monosm.drawString("status: type something to send data to port 11999", 15, 55);
-		else monosm.drawString("status: server not found. launch server app and check ports!\n\nreconnecting in "+ofToString( (5000 - deltaTime) / 1000 )+" seconds", 15, 55);
-	}
-
-	monosm.drawString("from server: \n"+msgRx, 15, 270);
 
 }
 
@@ -83,19 +54,6 @@ void testApp::draw(){
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
 
-	//you can only type if you're connected
-	if(weConnected){
-		if(key == 13)key = '\n';
-		if(key == 8 || key == 127){
-			if( pos != 0 ){pos--;
-				msgTx = msgTx.substr(0,pos);
-			}else msgTx = "";
-		}else{
-			msgTx.append(1, (char) key);
-			pos++;
-		}
-		typed = true;
-	}
 }
 
 //--------------------------------------------------------------

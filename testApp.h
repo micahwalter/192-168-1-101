@@ -1,10 +1,6 @@
 #ifndef _TEST_APP
 #define _TEST_APP
 
-
-
-
-
 #include "ofMain.h"
 #include "ofxNetwork.h"
 
@@ -25,20 +21,13 @@ class testApp : public ofBaseApp{
 		void windowResized(int w, int h);
 
 		ofxTCPClient tcpClient;
-		string msgTx, msgRx;
-
-		ofTrueTypeFont  mono;
-		ofTrueTypeFont  monosm;
+		string msgRx;
 
 		float counter;
 		int connectTime;
 		int deltaTime;
 
 		bool weConnected;
-
-		int size;
-		int pos;
-		bool typed;
 };
 
 #endif
