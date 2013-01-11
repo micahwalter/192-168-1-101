@@ -28,6 +28,12 @@ class testApp : public ofBaseApp{
 		int deltaTime;
 
 		bool weConnected;
+
+		ofVideoPlayer myPlayer;
+		ofTexture myTexture;
+
+		float packet;
+		int w, h;
 };
 
 #endif
